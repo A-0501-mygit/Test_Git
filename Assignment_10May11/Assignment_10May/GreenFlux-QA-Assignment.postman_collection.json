@@ -1,0 +1,1077 @@
+{
+	"info": {
+		"_postman_id": "36ceac20-6b97-4651-9549-47c458db7fbb",
+		"name": "GreenFlux-QA-Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Add/Create a Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"GroupId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1\",\n    \"amps\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get group details after Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.expect(jsonData.amps).to.eql(100);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1\",\n    \"amps\": 50\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get group details after Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.expect(jsonData.amps).to.eql(50);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get group details after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request_Update",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request12put",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ChargeStations",
+			"item": [
+				{
+					"name": "Add/Create a Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"GroupId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1\",\n    \"amps\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/\"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"\"3fa85f64-5717-4562-b3fc-2c963f66afa6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add/Create a charge station in a specific group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"ChargeStationId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1_Station1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get chargeStations details after Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations/{{ChargeStationId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations",
+								"{{ChargeStationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a chargeStations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1_Station-One\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations/{{ChargeStationId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations",
+								"{{ChargeStationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get chargeStations details after Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations/{{ChargeStationId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations",
+								"{{ChargeStationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a chargeStations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations/{{ChargeStationId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations",
+								"{{ChargeStationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get chargeStations details after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations/{{ChargeStationId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations",
+								"{{ChargeStationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Connectors",
+			"item": [
+				{
+					"name": "Add/Create a Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"GroupId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1\",\n    \"amps\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add/Create a charge station in a specific group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"ChargeStationId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anjana_Group1_Station1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}/chargeStations",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}",
+								"chargeStations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add/Create a Connector to a specific charge station",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"",
+									"pm.collectionVariables.set(\"ConnectorId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amps\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Connector details after Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors/{{ConnectorId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors",
+								"{{ConnectorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Connector",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amps\": 60\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors/{{ConnectorId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors",
+								"{{ConnectorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Connector details after Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors/{{ConnectorId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors",
+								"{{ConnectorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Connector",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors/{{ConnectorId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors",
+								"{{ConnectorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Connector details after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/ChargeStation/{{ChargeStationId}}/Connectors/{{ConnectorId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"ChargeStation",
+								"{{ChargeStationId}}",
+								"Connectors",
+								"{{ConnectorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Successful\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://gfx-smartcharging-assignment-api.azurewebsites.net/Groups/{{GroupId}}",
+							"protocol": "https",
+							"host": [
+								"gfx-smartcharging-assignment-api",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Groups",
+								"{{GroupId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request_connector",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "GroupId",
+			"value": ""
+		},
+		{
+			"key": "ChargeStationId",
+			"value": ""
+		},
+		{
+			"key": "ConnectorId",
+			"value": ""
+		}
+	]
+}
